@@ -2,23 +2,19 @@ from django.shortcuts import get_object_or_404, render, redirect
 import json
 from django.http import JsonResponse
 from .models import Book, Todo
-from django.conf import settings
-import os
-from rest_framework import viewsets
-# from .serializers import BookSerializer, TodoSerializer
-from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
+import logging
+
+logger = logging.getLogger(__name__)
 
 def book_search(request):
     query = request.GET.get('query', '')
     
-    books_file_path = os.path.join(settings.BASE_DIR, 'books.json')
-    with open(books_file_path, 'r') as file:
-        books_data = json.load(file)
+    books_data = Book.objects.all()
 
     if query:
-        books = [book for book in books_data if query.lower() in book['title'].lower()]
-        results = [{'id': book['id'], 'title': book['title']} for book in books]
+        books = [book for book in books_data if query.lower() in book.title.lower()]
+        results = [{'id': book.id, 'title': book.title} for book in books]
     else:
         results = []
     
@@ -36,6 +32,7 @@ def todo_list(request):
 
 @csrf_exempt
 def create_todo(request):
+    
     if request.method == 'POST':
         data = json.loads(request.body)
         book_id = data.get('book_id')
@@ -49,7 +46,8 @@ def create_todo(request):
                 print("New Book added")
                 
             todo = Todo.objects.create(book=book, todo_title=todo_title)
-            print("Todo created")
+            
+            logger.debug(f"Todo created for book {book.title} by user {request.user}")
 
             return JsonResponse({
                 'id': todo.id, 
