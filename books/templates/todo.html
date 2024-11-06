@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    
+    <!-- Todo creation form -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Todo</button>
+    </form>
+
+        <!-- Todo list display -->
+        <h2>Your Todos:</h2>
+        <ul>
+            {% for todo in todos %}
+                <li>
+                    <h3>{{ todo.title }}</h3> Status: {{ todo.status|yesno:"Completed,Not Completed" }}<br><br>
+                    <em>Generated Suggestions:</em> {{ todo.llm_response }} 
+                    {% if todo.status == 'False' %}
+                        <form method="post" action="{% url 'update_item' todo.pk %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Mark as Completed</button>
+                        </form>
+                    {% endif %}
+                    <form method="post" action="{% url 'delete_item' todo.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+</body>
+</html>
