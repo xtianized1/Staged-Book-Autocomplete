@@ -7,6 +7,12 @@ class BookSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'author']
 
 class TodoSerializer(serializers.ModelSerializer):
+    book = serializers.SerializerMethodField()
     class Meta:
         model = Todo
-        fields = ['id', 'title', 'description', 'book']
+        fields = ['id', 'book', 'todo_title', 'completed']
+
+    def get_book(self, obj):
+        if obj.book:
+            return obj.book.title
+        return None

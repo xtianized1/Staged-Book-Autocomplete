@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
@@ -8,6 +10,7 @@ class Book(models.Model):
         return self.title
 
 class Todo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     todo_title = models.CharField(max_length=255)
     completed = models.BooleanField(default=False)
