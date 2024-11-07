@@ -12,12 +12,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'django-insecure-^&yyohya3l)&ucaw^(s#d1i=z-o7!1wyc%s&ygh&b&0l9xva6!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG')
+# DEBUG = os.getenv('DJANGO_DEBUG')
+DEBUG = False
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = [
+    'frontend-production-c339.up.railway.app', 
+    'backend-production-207b.up.railway.app', 
+    'localhost', 
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -42,7 +49,12 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
+# CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "frontend-production-c339.up.railway.app",
+    "backend-production-207b.up.railway.app",
+]
 
 LOGGING = {
     'version': 1,
@@ -108,11 +120,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+        # 'NAME': os.getenv('DATABASE_NAME'),
+        # 'USER': os.getenv('DATABASE_USER'),
+        # 'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        # 'HOST': os.getenv('DATABASE_HOST'),
+        # 'PORT': os.getenv('DATABASE_PORT'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'EFCECMfoooLeVqNZItVUeFcOsBKfMWAP',
+        'HOST': 'junction.proxy.rlwy.net',
+        'PORT': '13216',
     }
 }
 
