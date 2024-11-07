@@ -52,8 +52,8 @@ REST_FRAMEWORK = {
 # CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "frontend-production-c339.up.railway.app",
-    "backend-production-207b.up.railway.app",
+    "http://frontend-production-c339.up.railway.app",
+    "http://backend-production-207b.up.railway.app",
 ]
 
 LOGGING = {
