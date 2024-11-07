@@ -16,13 +16,14 @@ SECRET_KEY = 'django-insecure-^&yyohya3l)&ucaw^(s#d1i=z-o7!1wyc%s&ygh&b&0l9xva6!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.getenv('DJANGO_DEBUG')
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 ALLOWED_HOSTS = [
     'frontend-production-c339.up.railway.app', 
     'backend-production-207b.up.railway.app', 
     'localhost', 
+    'localhost:3000',
     '127.0.0.1'
 ]
 
@@ -51,9 +52,10 @@ REST_FRAMEWORK = {
 
 # CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://frontend-production-c339.up.railway.app",
-    "http://backend-production-207b.up.railway.app",
+    "http://localhost:8000",
+    "https://frontend-production-c339.up.railway.app",
+    "https://backend-production-207b.up.railway.app",
+    "http://localhost:3000",
 ]
 
 LOGGING = {
