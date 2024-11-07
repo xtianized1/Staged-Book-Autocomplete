@@ -17,7 +17,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = ["http://localhost:3000, https://frontend-production-c339.up.railway.app/"]
+ALLOWED_HOSTS = ["http://localhost:3000", 
+                 "https://frontend-production-c339.up.railway.app"]
 
 
 # Application definition
@@ -43,7 +44,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000, https://frontend-production-c339.up.railway.app/",
+    "http://localhost:3000", 
+    "https://frontend-production-c339.up.railway.app",
 ]
 
 LOGGING = {
